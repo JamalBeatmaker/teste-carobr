@@ -1,32 +1,5 @@
-input.onButtonPressed(Button.A, function () {
-    hackbitmotors.MotorRun(hackbitmotors.Motors.M1B, 100)
-    basic.showLeds(`
-        . . # . .
-        . # . . .
-        # # # # #
-        . # . . .
-        . . # . .
-        `)
-})
-input.onButtonPressed(Button.AB, function () {
-    hackbitmotors.MotorStopAll()
-    basic.showLeds(`
-        . . . . .
-        # # . # #
-        # # . # #
-        . . . . .
-        . # # # .
-        `)
-})
 input.onButtonPressed(Button.B, function () {
-    hackbitmotors.MotorRun(hackbitmotors.Motors.M1A, 100)
-    basic.showLeds(`
-        . . # . .
-        . . . # .
-        # # # # #
-        . . . # .
-        . . # . .
-        `)
+    hackbitmotors.MotorStopAll()
 })
 let distancia = 0
 led.enable(false)
@@ -38,12 +11,36 @@ basic.forever(function () {
     )
     if (distancia <= 10) {
         hackbitmotors.MotorStopAll()
+        basic.pause(100)
+        hackbitmotors.MotorRunDual(
+        hackbitmotors.Motors.M1A,
+        85,
+        hackbitmotors.Motors.M1B,
+        -45
+        )
+        basic.pause(100)
+        hackbitmotors.MotorRunDelay(hackbitmotors.Motors.M1A, 80, 2)
+        hackbitmotors.MotorRunDelay(hackbitmotors.Motors.M1B, 80, 2)
+        basic.pause(100)
+        hackbitmotors.MotorRunDual(
+        hackbitmotors.Motors.M1A,
+        0,
+        hackbitmotors.Motors.M1B,
+        85
+        )
+        basic.pause(100)
+        hackbitmotors.MotorRunDual(
+        hackbitmotors.Motors.M1A,
+        85,
+        hackbitmotors.Motors.M1B,
+        85
+        )
     } else {
         hackbitmotors.MotorRunDual(
         hackbitmotors.Motors.M1A,
-        255,
+        90,
         hackbitmotors.Motors.M1B,
-        255
+        90
         )
     }
 })
